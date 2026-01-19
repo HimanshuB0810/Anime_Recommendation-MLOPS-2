@@ -25,7 +25,7 @@ class DataIngestion:
             client = Minio(
                         "localhost:9000",
                         access_key="minioadmin",
-                        secret_key="minioadmin",
+                        secret_key="minioadmin123",
                         secure=False                           
             )
 
@@ -39,9 +39,9 @@ class DataIngestion:
                         file_path=file_path
                     )
 
-                    data = pd.read_csv(file_path, nrows=5_000_000)
+                    data = pd.read_csv(file_path, nrows=20_000_000)
                     data.to_csv(file_path, index=False)
-                    logger.info("Large file detected only downloading 5M rows")
+                    logger.info("Large file detected only downloading 20M rows")
                 
                 else:
                     client.fget_object(

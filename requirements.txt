@@ -4,3 +4,6 @@ numpy
 minio
 pyyaml
 tensorflow
+joblib
+sci
+scikit-learn
