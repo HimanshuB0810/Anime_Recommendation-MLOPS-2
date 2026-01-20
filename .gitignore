@@ -1,7 +1,7 @@
 shared_venv/
 logs/
 MLOPS_PROJECT_2.egg-info/
-artifacts/raw/animelist.csv/
+
 artifacts/raw/
 artifacts/processed/
 artifacts/model/
