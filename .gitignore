@@ -7,3 +7,4 @@ artifacts/processed/
 artifacts/model/
 artifacts/weights/
 artifacts/model_checkpoint/
+artifacts/processed/data/
