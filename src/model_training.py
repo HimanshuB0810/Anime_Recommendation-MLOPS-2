@@ -1,6 +1,8 @@
+import comet_ml
 import joblib
 import numpy as np
 import os
+import sys
 import tensorflow as tf
 from tensorflow.keras.callbacks import ModelCheckpoint,LearningRateScheduler,TensorBoard,EarlyStopping
 from src.logger import get_logger
@@ -9,12 +11,19 @@ from src.base_model import BaseModel
 from config.path_config import *
 
 
+
 logger=get_logger(__name__)
 
 class ModelTraining:
     def __init__(self,data_path):
         self.data_path=data_path
-        logger.info("Model Trainig Initialized")
+
+        self.experiment=comet_ml.Experiment(
+            api_key="Gv4cVIjCKQTRqXwYF5Drx4qsy",
+            project_name="Mlops-2",
+            workspace="himanshub0810"
+        )
+        logger.info("Model Trainig & COMET-ML Initialized")
 
     def load_datasets(self):
         try:
@@ -35,7 +44,7 @@ class ModelTraining:
             logger.info("Successfully Loaded Train_ds and Val_ds in train_model")
 
             n_users=len(joblib.load(USER2USER_ENCODED))
-            n_anime=len(joblib.load(USER2USER_ENCODED))
+            n_anime=len(joblib.load(ANIME2ANIME_ENCODED))
 
             base_model=BaseModel(config_path=CONFIG_PATH)
 
@@ -82,6 +91,14 @@ class ModelTraining:
                 model.load_weights(CHECKPOINT_FILEPATH)
                 logger.info("Model Training Completed")
 
+                for epoch in range(len(history.history['loss'])):
+                    train_loss=history.history["loss"][epoch]
+                    val_loss=history.history["val_loss"][epoch]
+
+                    self.experiment.log_metric('train_loss',train_loss,step=epoch)
+                    self.experiment.log_metric('val_loss',val_loss,step=epoch)
+
+
             except Exception as e:
                 raise CustomException("Model Training Failed")
             
@@ -100,7 +117,7 @@ class ModelTraining:
                 return weights 
             except  Exception as e:
                 logger.error(str(e))
-                raise CustomException("Error while Extracting weights",e)
+                raise CustomException("Error while Extracting weights")
               
     def save_model_weights(self,model):
         try:
@@ -112,6 +129,10 @@ class ModelTraining:
 
             joblib.dump(user_weights,USER_WEIGHTS_PATH)
             joblib.dump(anime_weights,ANIME_WEIGHTS_PATH)
+
+            self.experiment.log_asset(MODEL_PATH)
+            self.experiment.log_asset(ANIME_WEIGHTS_PATH)
+            self.experiment.log_asset(USER_WEIGHTS_PATH)
 
             logger.info("User and Anime weights saved successfully")
         except  Exception as e:

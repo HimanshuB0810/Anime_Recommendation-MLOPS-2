@@ -7,3 +7,5 @@ tensorflow
 joblib
 sci
 scikit-learn
+comet-ml
+dvc
