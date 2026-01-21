@@ -1,7 +1,7 @@
 [core]
     remote = minio
 ['remote "minio"']
-    url = s3://mlop-project-2
+    url = s3://mlop-artifacts
     endpointurl = http://localhost:9000
     access_key_id = minioadmin
     secret_access_key = minioadmin123
