@@ -1,8 +1,7 @@
 [core]
     remote = minio
 ['remote "minio"']
-    url = s3://mlops-artifacts/
+    url = s3://mlops-dvc-bucket
     endpointurl = http://localhost:9000
     access_key_id = minioadmin
-    secret_access_key = minioadmin123
-    use_ssl = false
+    secret_access_key = minioadmin
