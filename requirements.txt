@@ -9,3 +9,4 @@ sci
 scikit-learn
 comet-ml
 dvc
+flask

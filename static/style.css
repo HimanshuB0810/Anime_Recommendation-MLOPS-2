@@ -1,0 +1,199 @@
+/* Anime Recommender System - Complete Stylesheet
+   Theme: Cyber-Anime (Cyan, Gold, and Dark Glass)
+*/
+
+/* --- General Reset & Fonts --- */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Poppins', sans-serif;
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    /* High-quality anime background - ensures a professional look */
+    background: url('https://images.alphacoders.com/132/1326442.png') no-repeat center center fixed;
+    background-size: cover;
+    color: #fff;
+    overflow-x: hidden;
+}
+
+/* --- Visual Layers --- */
+/* Dark overlay to ensure text readability regardless of the background image */
+.overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.7); 
+    z-index: 1;
+}
+
+.main-content {
+    position: relative;
+    z-index: 2;
+    width: 100%;
+    max-width: 550px;
+    padding: 20px;
+}
+
+/* --- Glassmorphism Container --- */
+.form-container {
+    background: rgba(255, 255, 255, 0.05);
+    backdrop-filter: blur(15px);
+    -webkit-backdrop-filter: blur(15px);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 24px;
+    padding: 50px 40px;
+    box-shadow: 0 25px 50px rgba(0, 0, 0, 0.5);
+    text-align: center;
+}
+
+/* --- Typography & Titles --- */
+header h1 {
+    font-family: 'Bangers', cursive;
+    font-size: 3.2rem;
+    letter-spacing: 3px;
+    margin-bottom: 8px;
+    color: #ffffff;
+    text-shadow: 3px 3px 0px rgba(0, 0, 0, 0.8);
+}
+
+/* Updated high-visibility Cyan for the keyword */
+header h1 span {
+    color: #00f2ff; 
+    text-transform: uppercase;
+    text-shadow: 0 0 15px rgba(0, 242, 255, 0.7);
+}
+
+header p {
+    font-size: 1rem;
+    color: #bbb;
+    margin-bottom: 35px;
+    font-weight: 300;
+}
+
+/* --- Form Elements --- */
+.input-group {
+    text-align: left;
+    margin-bottom: 25px;
+}
+
+label {
+    display: block;
+    margin-bottom: 10px;
+    font-size: 0.9rem;
+    font-weight: 400;
+    color: #00f2ff; /* Matching Cyan for labels */
+    letter-spacing: 1px;
+}
+
+input[type="number"] {
+    width: 100%;
+    padding: 14px 18px;
+    border-radius: 12px;
+    border: 2px solid rgba(255, 255, 255, 0.1);
+    background: rgba(0, 0, 0, 0.3);
+    color: #fff;
+    font-size: 1.1rem;
+    outline: none;
+    transition: all 0.3s ease;
+}
+
+input[type="number"]:focus {
+    border-color: #00f2ff;
+    background: rgba(0, 0, 0, 0.5);
+    box-shadow: 0 0 15px rgba(0, 242, 255, 0.3);
+}
+
+/* --- Interactive Button --- */
+.glow-button {
+    width: 100%;
+    padding: 16px;
+    border: none;
+    border-radius: 12px;
+    background: linear-gradient(135deg, #00c6ff 0%, #0072ff 100%);
+    color: white;
+    font-weight: 700;
+    font-size: 1.1rem;
+    cursor: pointer;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    transition: all 0.4s ease;
+    box-shadow: 0 6px 20px rgba(0, 114, 255, 0.4);
+}
+
+.glow-button:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 10px 30px rgba(0, 198, 255, 0.6);
+    filter: brightness(1.1);
+}
+
+.glow-button:active {
+    transform: translateY(-1px);
+}
+
+/* --- Recommendation Results --- */
+.result-container {
+    margin-top: 40px;
+    border-top: 1px solid rgba(255, 255, 255, 0.1);
+    padding-top: 25px;
+}
+
+.result-container h2 {
+    font-size: 1.4rem;
+    margin-bottom: 20px;
+    color: #ffd700; /* Gold for "Top Picks" */
+    text-shadow: 0 0 10px rgba(255, 215, 0, 0.3);
+}
+
+.anime-list {
+    list-style: none;
+    text-align: left;
+}
+
+.anime-list li {
+    background: rgba(255, 255, 255, 0.05);
+    margin-bottom: 12px;
+    padding: 15px 20px;
+    border-radius: 12px;
+    display: flex;
+    align-items: center;
+    border: 1px solid rgba(255, 255, 255, 0.05);
+    transition: all 0.3s ease;
+}
+
+.anime-list li:hover {
+    background: rgba(255, 255, 255, 0.1);
+    transform: scale(1.02);
+    border-color: rgba(0, 242, 255, 0.4);
+}
+
+.rank {
+    font-weight: 700;
+    font-size: 1.2rem;
+    color: #ffd700; /* Gold for rank numbers */
+    margin-right: 20px;
+    min-width: 25px;
+}
+
+.title {
+    font-size: 1rem;
+    font-weight: 400;
+    color: #efefef;
+}
+
+/* --- Responsive Design --- */
+@media (max-width: 480px) {
+    .form-container {
+        padding: 30px 20px;
+    }
+    header h1 {
+        font-size: 2.4rem;
+    }
+}
