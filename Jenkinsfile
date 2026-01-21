@@ -42,14 +42,18 @@ pipeline{
                         echo 'Pulling data from MinIO using DVC...'
                         sh '''
                         . ${VENV_DIR}/bin/activate
+
                         export AWS_ACCESS_KEY_ID=$AWS_ACCESS_KEY_ID
                         export AWS_SECRET_ACCESS_KEY=$AWS_SECRET_ACCESS_KEY
-                        export AWS_ENDPOINT_URL=http://host.docker.internal:9000
-                        dvc pull
+                        export AWS_ENDPOINT_URL=http://minio:9000
+                        export AWS_EC2_METADATA_DISABLED=true
+
+                        dvc pull --force
                         '''
                     }
                 }
             }
         }
+
     }
 }
