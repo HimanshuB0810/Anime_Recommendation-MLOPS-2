@@ -39,7 +39,7 @@ pipeline{
                 ]) {
                     sh '''
                     . shared_venv/bin/activate
-                    export AWS_ENDPOINT_URL=http://localhost:9000
+                    export AWS_ENDPOINT_URL=http://minio:9000
                     dvc pull
                     '''
                 }
