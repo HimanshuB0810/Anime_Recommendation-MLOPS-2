@@ -38,6 +38,7 @@ pipeline{
                     string(credentialsId: 'minio-secret-key', variable: 'AWS_SECRET_ACCESS_KEY')
                 ]) {
                     sh '''
+                    . shared_venv/bin/activate
                     export AWS_ENDPOINT_URL=http://localhost:9000
                     dvc pull
                     '''
