@@ -10,4 +10,4 @@ comet-ml
 dvc
 dvc-s3
 flask
-psycopg2-binary
+
