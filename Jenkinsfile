@@ -3,6 +3,9 @@ pipeline{
 
     environment {
         VENV_DIR='shared_venv'
+        GCP_PROJECT = 'mlops-new-447207'
+        GCLOUD_PATH = "/var/jenkins_home/google-cloud-sdk/bin"
+        KUBECTL_AUTH_PLUGIN = "/usr/lib/google-cloud-sdk/bin"
     }
 
     stages{
@@ -45,6 +48,28 @@ pipeline{
                 }
             }
         }
+
+        stage('Build and Push Docker Image'){
+            steps{
+                withCredentials([
+                    usernamePassword(credentialsId: 'dockerhub-creds', usernameVariable: 'DOCKER_USER', passwordVariable: 'DOCKER_PASS')
+                ]) {
+                    sh '''
+                    echo "$DOCKER_PASS" | docker login -u "$DOCKER_USER" --password-stdin
+                    docker build -t $DOCKER_USER/ml-project:latest .
+                    docker push $DOCKER_USER/ml-project:latest
+                    '''
+                }
+            }
+        }
+
+        stage('Deploying to Kubernetes'){
+        steps{
+            sh '''
+            kubectl apply -f deployment.yaml
+            '''
+        }
+    }
 
     }
 }
