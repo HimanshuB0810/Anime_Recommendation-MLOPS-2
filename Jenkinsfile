@@ -63,13 +63,13 @@ pipeline{
             }
         }
 
-        stage('Deploying to Kubernetes'){
-        steps{
-            sh '''
-            kubectl apply -f deployment.yaml
-            '''
-        }
-    }
+        // stage('Deploying to Kubernetes'){
+        //     steps{
+        //         sh '''
+        //         kubectl apply -f deployment.yaml
+        //         '''
+        //     }
+        // }
 
     }
 }
