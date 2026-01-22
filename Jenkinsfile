@@ -56,7 +56,7 @@ pipeline{
                 ]) {
                     sh '''
                     echo "$DOCKER_PASS" | docker login -u "$DOCKER_USER" --password-stdin
-                    docker build -t $DOCKER_USER/ml-project:latest .
+                    docker build --progress=plain -t $DOCKER_USER/ml-project:latest .
                     docker push $DOCKER_USER/ml-project:latest
                     '''
                 }
