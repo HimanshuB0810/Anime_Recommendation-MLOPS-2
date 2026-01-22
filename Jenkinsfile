@@ -23,12 +23,27 @@ pipeline{
                     sh '''
                     python -m venv ${VENV_DIR}
                     . ${VENV_DIR}/bin/activate
-                    pip install --upgrade pip
+                    pip install --upgrade pip 
                     pip install -e .
                     pip install dvc
                     '''
                 }
             }
         }
+
+        stage('DVC Pull'){
+            steps{
+                withCredentials([
+                    string(credentialsId: 'minio-access-key', variable: 'AWS_ACCESS_KEY_ID'),
+                    string(credentialsId: 'minio-secret-key', variable: 'AWS_SECRET_ACCESS_KEY')
+                ]) {
+                    sh '''
+                    export AWS_ENDPOINT_URL=http://localhost:9000
+                    dvc pull
+                    '''
+                }
+            }
+        }
+
     }
 }
