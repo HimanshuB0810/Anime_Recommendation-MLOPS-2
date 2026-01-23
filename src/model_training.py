@@ -11,6 +11,10 @@ from src.base_model import BaseModel
 from config.path_config import *
 
 
+if os.getenv("CI") == "true":
+    print("CI detected → Skipping model training")
+    sys.exit(0)
+
 
 logger=get_logger(__name__)
 

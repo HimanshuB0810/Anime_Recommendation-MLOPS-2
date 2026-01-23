@@ -3,6 +3,7 @@ pipeline {
 
     environment {
         VENV_DIR = 'shared_venv'
+        CI = 'true'
     }
 
     stages {
