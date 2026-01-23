@@ -26,7 +26,7 @@ pipeline {
                 ]) {
                     sh '''
                     . ${VENV_DIR}/bin/activate
-                    export AWS_ENDPOINT_URL=http://localhost:9000
+                    export AWS_ENDPOINT_URL=http://minio:9000
                     export AWS_DEFAULT_REGION=us-east-1
                     dvc pull
                     '''
