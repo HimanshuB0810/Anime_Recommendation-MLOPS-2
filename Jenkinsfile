@@ -28,6 +28,7 @@ pipeline {
                     . ${VENV_DIR}/bin/activate
                     export AWS_ENDPOINT_URL=http://minio:9000
                     export AWS_DEFAULT_REGION=us-east-1
+                    dvc remote modify myminio endpointurl http://minio:9000
                     dvc pull
                     '''
                 }
