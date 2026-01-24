@@ -26,14 +26,22 @@ pipeline {
                 ]) {
                     sh '''
                     . ${VENV_DIR}/bin/activate
-                    export AWS_ENDPOINT_URL=http://minio:9000
+
                     export AWS_DEFAULT_REGION=us-east-1
+                    export AWS_ENDPOINT_URL=http://minio:9000
+
+                    dvc remote add -f myminio s3://my-dvc-bucket
                     dvc remote modify myminio endpointurl http://minio:9000
+                    dvc remote modify myminio use_ssl false
+                    dvc remote modify myminio access_key_id $AWS_ACCESS_KEY_ID
+                    dvc remote modify myminio secret_access_key $AWS_SECRET_ACCESS_KEY
+
                     dvc pull
                     '''
                 }
             }
         }
+
 
         stage('Build and Push Docker Image') {
             steps {

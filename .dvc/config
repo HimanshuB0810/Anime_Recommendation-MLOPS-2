@@ -1,0 +1,8 @@
+[core]
+    remote = myminio
+['remote "myminio"']
+    url = s3://my-dvc-bucket
+    endpointurl = http://localhost:9000
+    use_ssl = false
+    access_key_id = minioadmin
+    secret_access_key = minioadmin123
