@@ -1,35 +1,24 @@
-FROM python:3.8-slim
+FROM python:3.10-slim
 
-# Set environment variables to prevent Python from writing .pyc files & Ensure Python output is not buffered
-ENV PYTHONDONTWRITEBYTECODE=1 \
-    PYTHONUNBUFFERED=1
+# Prevent Python from writing pyc files
+ENV PYTHONDONTWRITEBYTECODE=1
+ENV PYTHONUNBUFFERED=1
 
-# Install system dependencies required by TensorFlow
-RUN apt-get update && apt-get install -y \
-    build-essential \
-    libatlas-base-dev \
-    libhdf5-dev \
-    libprotobuf-dev \
-    protobuf-compiler \
-    python3-dev \
-    && apt-get clean \
-    && rm -rf /var/lib/apt/lists/*
-
-# Set the working directory
 WORKDIR /app
 
-# Copy the application code
+# Install system dependencies 
+RUN apt-get update && apt-get install -y \
+    build-essential \
+    && rm -rf /var/lib/apt/lists/*
+
+# Copy requirements first 
+COPY requirements.txt .
+
+RUN pip install --no-cache-dir -r requirements.txt
+
+# Copy the rest of the app
 COPY . .
 
-# Install dependencies from requirements.txt
-RUN pip install --no-cache-dir -e .
+EXPOSE 7860
 
-# Train the model before running the application
-RUN python pipeline/training_pipeline.py
-
-# Expose the port that Flask will run on
-EXPOSE 5000
-
-# Command to run the app
 CMD ["python", "application.py"]
-
