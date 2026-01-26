@@ -18,9 +18,28 @@
 
             <form action="/" method="POST">
                 <div class="input-group">
-                    <label for="userID">Enter your User ID</label>
-                    <input type="number" id="userID" name="userID" placeholder="e.g. 11880" required>
+                    <label for="userID">User ID (Optional - for personalized history)</label>
+                    <input type="number" id="userID" name="userID" placeholder="e.g. 11880">
                 </div>
+
+                <div class="input-group">
+                    <label>Select Genres:</label>
+
+                    <div class="genre-box">
+                        {% for genre in [
+                            "Action","Adventure","Comedy","Drama","Fantasy","Horror",
+                            "Mystery","Romance","Sci-Fi","Slice of Life","Sports",
+                            "Supernatural","Thriller"
+                        ] %}
+                        <label class="genre-pill">
+                            <input type="checkbox" name="genres" value="{{ genre }}">
+                            <span>{{ genre }}</span>
+                        </label>
+                        {% endfor %}
+                    </div>
+                </div>
+
+
                 <button type="submit" class="glow-button">Get Recommendations</button> 
             </form>
 

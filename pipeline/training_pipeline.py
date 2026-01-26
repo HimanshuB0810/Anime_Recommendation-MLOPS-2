@@ -6,8 +6,8 @@ from src.model_training import ModelTraining
 
 if __name__=="__main__":
 
-    # data_ingestion = DataIngestion(read_yaml(CONFIG_PATH))
-    # data_ingestion.run()
+    data_ingestion = DataIngestion(read_yaml(CONFIG_PATH))
+    data_ingestion.run()
 
     data_processor=DataProcessor(ANIMELIST_CSV,PROCESSED_DIR)
     data_processor.run()
